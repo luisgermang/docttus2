@@ -1,0 +1,1416 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <!-- Configuración para móviles -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Docttus Audiolibro</title>
+  <!-- Google Fonts y Font Awesome -->
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    /* =================== */
+    /* VARIABLES Y RESET   */
+    /* =================== */
+    :root {
+      --primary: #2589fe;
+      --secondary: #3db13d;
+      --accent: #ff6b6b;
+      --bg: #f5f5f5;
+      --light: #ffffff;
+      --text: #fff;
+      --gray: #777;
+      --header-height: 60px;
+      --left-width: 350px;
+      /* Color verde para reproductor, separadores y materiales */
+      --green: #00ff8f;
+      /* Fondo oscuro de la columna izquierda */
+      --darkLeft: #121b2a;
+      /* Fondo de la sección derecha */
+      --rightBg: #152439;
+      /* Fondo para los comentarios */
+      --commentBg: #2a3a4a;
+      /* Parámetros para conversación estilo WhatsApp */
+      --avatar-large: 40px;
+      --avatar-small: 30px;
+      --quote-bg: rgba(0,0,0,0.1);
+      --quote-font: 0.8rem;
+    }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    html, body {
+      background: var(--rightBg);
+    }
+    body {
+      font-family: 'Roboto', sans-serif;
+      color: var(--text);
+      line-height: 1.6;
+      padding-bottom: 80px; /* espacio para el footer */
+    }
+    
+    /* =================== */
+    /* HEADER (MÓVIL)      */
+    /* =================== */
+    .mobile-header {
+      display: none;
+    }
+    @media(max-width: 768px) {
+      .mobile-header {
+        display: flex;
+        align-items: center;
+        height: var(--header-height);
+        background: var(--rightBg);
+        padding: 0 20px;
+        z-index: 1000;
+      }
+      .hamburger {
+        font-size: 1.8rem;
+        margin-right: 10px;
+        color: #fff;
+        cursor: pointer;
+      }
+    }
+    
+    /* =================== */
+    /* CONTENEDOR PRINCIPAL */
+    /* =================== */
+    .main-container {
+      display: flex;
+      margin-top: 0;
+    }
+    
+    /* =================== */
+    /* BARRA IZQUIERDA     */
+    /* =================== */
+    .left-zone {
+      position: fixed;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      width: var(--left-width);
+      background: var(--darkLeft);
+      padding: 20px;
+      overflow-y: auto;
+      transition: transform 0.3s ease;
+      z-index: 1200;
+    }
+    @media(min-width: 769px) {
+      .left-zone {
+        transform: none;
+      }
+    }
+    @media(max-width: 768px) {
+      .left-zone {
+        width: 80%;
+        transform: translateX(-100%);
+      }
+      .left-zone.open {
+        transform: translateX(0);
+      }
+    }
+    .left-zone::-webkit-scrollbar {
+      display: none;
+    }
+    /* Botón de cierre en móvil */
+    .close-menu {
+      display: none;
+      font-size: 1.8rem;
+      color: #fff;
+      cursor: pointer;
+      text-align: right;
+      margin-bottom: 20px;
+    }
+    @media(max-width: 768px) {
+      .close-menu {
+        display: block;
+      }
+    }
+    /* Menú lateral */
+    .left-menu {
+      margin-bottom: 20px;
+      border-bottom: 1px solid var(--gray);
+      padding-bottom: 10px;
+    }
+    .left-menu a {
+      color: var(--light);
+      text-decoration: none;
+      font-size: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      margin-bottom: 10px;
+    }
+    .left-menu a:hover {
+      color: var(--green);
+    }
+    
+    /* =================== */
+    /* CONTENIDO IZQUIERDA  */
+    /* =================== */
+    .audio-player {
+      padding: 20px;
+      border: 1px solid var(--green);
+      border-radius: 8px;
+      margin-bottom: 20px;
+      background: transparent;
+      text-align: center;
+    }
+    .audio-player .player-cover {
+      width: 150px;
+      height: 150px;
+      margin: 0 auto 15px;
+      border: 1px solid var(--gray);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    .audio-player .player-cover img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .audio-player .controls {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .audio-player .controls button {
+      background: none;
+      border: none;
+      font-size: 2rem;
+      color: var(--green);
+      cursor: pointer;
+      margin-bottom: 10px;
+    }
+    .audio-player .progress-container {
+      width: 100%;
+      max-width: 500px;
+      height: 8px;
+      background: #fff;
+      border-radius: 4px;
+      margin-bottom: 5px;
+      cursor: pointer;
+      position: relative;
+    }
+    .audio-player .progress-bar {
+      width: 0%;
+      height: 100%;
+      background: var(--green);
+      border-radius: 4px;
+      transition: width 0.1s linear;
+    }
+    .audio-player .time {
+      font-size: 0.9rem;
+      color: #fff;
+      margin-bottom: 10px;
+      text-align: center;
+    }
+    .audio-player .volume {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 20px;
+      justify-content: center;
+    }
+    .audio-player .volume i {
+      color: #fff;
+      cursor: pointer;
+    }
+    .audio-player .volume input[type="range"] {
+      width: 80px;
+      -webkit-appearance: none;
+      background: transparent;
+      border-radius: 4px;
+    }
+    .audio-player .volume input[type="range"]::-webkit-slider-runnable-track {
+      height: 8px;
+      background: transparent;
+      border-radius: 4px;
+    }
+    .audio-player .volume input[type="range"]::-moz-range-track {
+      height: 8px;
+      background: transparent;
+      border-radius: 4px;
+    }
+    .audio-player .volume input[type="range"]::-ms-track {
+      height: 8px;
+      background: transparent;
+      border-radius: 4px;
+    }
+    .audio-player .volume input[type="range"]::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      background: var(--green);
+      margin-top: -4px;
+    }
+    .audio-player .volume input[type="range"]::-moz-range-thumb {
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      background: var(--green);
+    }
+    .audio-player .volume input[type="range"]::-ms-thumb {
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      background: var(--green);
+    }
+    
+    /* =================== */
+    /* LISTA DE CAPÍTULOS   */
+    /* =================== */
+    .playlist {
+      padding: 20px;
+      background: var(--darkLeft);
+      margin-bottom: 20px;
+      border: none;
+    }
+    .playlist h3 {
+      text-align: center;
+      font-size: 1.2rem;
+      color: #fff;
+      margin-bottom: 10px;
+    }
+    .playlist ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    .playlist li {
+      padding: 8px 0;
+      font-size: 0.95rem;
+      cursor: pointer;
+      color: #fff;
+      transition: color 0.3s;
+      position: relative;
+      padding-left: 20px;
+    }
+    .playlist li:hover,
+    .playlist li.active {
+      color: var(--green);
+    }
+    .playlist li.active::before {
+      content: "\f130";
+      font-family: "Font Awesome 6 Free";
+      font-weight: 900;
+      position: absolute;
+      left: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 0.8rem;
+      color: var(--green);
+    }
+    
+    /* =================== */
+    /* DESCARGAS           */
+    /* =================== */
+    .downloads {
+      padding: 20px;
+      background: var(--darkLeft);
+      border: none;
+      margin-bottom: 20px;
+    }
+    .downloads h3 {
+      text-align: center;
+      font-size: 1.2rem;
+      color: #fff;
+      margin-bottom: 10px;
+    }
+    .downloads ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    .downloads li {
+      padding: 8px 0;
+      font-size: 0.95rem;
+    }
+    .downloads li a {
+      text-decoration: none;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+    .downloads li a:hover {
+      color: var(--green);
+    }
+    
+    /* =================== */
+    /* ZONA DERECHA        */
+    /* =================== */
+    .right-zone {
+      margin-left: var(--left-width);
+      flex: 1;
+      padding: 20px;
+      background: var(--rightBg);
+      color: #fff;
+    }
+    .inner-container {
+      max-width: 800px;
+      margin: 0 auto;
+      background: transparent;
+    }
+    /* --- SECCIÓN PORTADA Y DESCRIPCIÓN DEL LIBRO --- */
+    .content {
+      display: flex;
+      gap: 20px;
+      align-items: flex-start;
+      flex-wrap: wrap;
+      margin-bottom: 20px;
+    }
+    .cover {
+      flex: 0 0 40%;
+      max-width: 40%;
+      margin-bottom: 20px;
+    }
+    .cover img {
+      width: 100%;
+      height: auto;
+      border-radius: 10px;
+    }
+    .book-info {
+      flex: 1;
+    }
+    .book-info h2 {
+      font-size: 2rem;
+      margin-bottom: 10px;
+      text-align: left;
+    }
+    .book-info h3 {
+      font-size: 1.4rem;
+      margin-bottom: 15px;
+      text-align: left;
+    }
+    .book-info p {
+      text-align: justify;
+      margin-bottom: 15px;
+    }
+    
+    /* =================== */
+    /* SECCIÓN DATOS DEL LIBRO - PARTE INFERIOR */
+    /* =================== */
+    .book-extra-section {
+      max-width: 800px;
+      margin: 0 auto 30px;
+      display: flex;
+      gap: 20px;
+      border-top: 1px solid var(--green); /* Línea separadora en verde */
+      padding-top: 20px;
+    }
+    .extra-column {
+      flex: 1;
+    }
+    /* Columna de datos y botón de calificación */
+    .extra-column.data {
+      font-size: 1rem;
+      line-height: 1.4;
+    }
+    .extra-column.data p {
+      margin-bottom: 10px;
+    }
+    .extra-column.data .rate-button {
+      background: transparent;
+      color: var(--light);
+      border: 1px solid var(--light);
+      padding: 8px 15px;
+      border-radius: 5px;
+      font-size: 0.9rem;
+      cursor: pointer;
+      transition: background 0.3s, color 0.3s;
+      min-width: 150px;
+    }
+    .extra-column.data .rate-button:hover {
+      background: rgba(255, 255, 255, 0.2);
+    }
+    /* Columna de compra */
+    .extra-column.purchase {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      align-items: center;
+    }
+    .extra-column.purchase .btn {
+      display: inline-block;
+      padding: 13px 18px;
+      border-radius: 5px;
+      font-size: 0.9rem;
+      background: transparent;
+      color: var(--light);
+      border: 1px solid var(--light);
+      cursor: pointer;
+      transition: background 0.3s, color 0.3s;
+      text-align: center;
+      min-width: 150px;
+    }
+    .extra-column.purchase .btn:hover {
+      background: rgba(255, 255, 255, 0.2);
+    }
+    .extra-column.purchase .btn i {
+      color: var(--green);
+      margin-right: 5px;
+    }
+    .extra-column.purchase .amazon {
+      margin-top: 15px;
+      text-align: center;
+    }
+    .extra-column.purchase .amazon img {
+      width: 100px;
+      height: auto;
+      display: block;
+      margin: 10px auto 0;
+    }
+    
+    
+    /* =================== */
+    /* SECCIÓN BIOGRAFÍA   */
+    /* =================== */
+    .author {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      border-top: 1px solid var(--green);
+      padding-top: 15px;
+      margin-top: 20px;
+    }
+    .author img {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+    .author .author-info h3 {
+      font-size: 1.2rem;
+      margin-bottom: 5px;
+    }
+    .author .author-info p {
+      font-size: 0.95rem;
+    }
+    
+    /* =================== */
+    /* SECCIÓN COMENTARIOS  */
+    /* =================== */
+    .comments-section {
+      margin-top: 30px;
+      border-top: 1px solid var(--green);
+      padding-top: 20px;
+    }
+    .comment-form {
+      padding: 15px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 5px;
+    }
+    .comment-form textarea {
+      width: 100%;
+      height: 100px;
+      padding: 10px;
+      border: none;
+      border-radius: 5px;
+      resize: vertical;
+      font-size: 1rem;
+      word-wrap: break-word;
+    }
+    .comment-btn-container {
+      text-align: right;
+      margin-top: 10px;
+      
+    }
+
+
+    .comment-form button {
+      align-self: flex-end;
+      background: transparent;
+      color: var(--light);
+      border: 1px solid var(--light);
+      padding: 8px 15px;
+      border-radius: 5px;
+      font-size: 0.9rem;
+      cursor: pointer;
+      transition: background 0.3s, color 0.3s;
+    }
+    .comment-form button:hover {
+      background: rgba(255, 255, 255, 0.2);
+    }
+
+
+
+/***************************************************
+****************************************************
+****************************************************
+
+Estilos generales para cada comentario 
+
+*********************************************************
+********************************************************
+********************************************************/
+/* Contenedor principal de la sección de comentarios */
+.comments-section {
+      margin-top: 20px; /* Separación superior */
+    }
+    /* Cada grupo de comentarios (comentario original y sus respuestas) */
+    .comment-group {
+      margin-bottom: 20px;
+    }
+    /* Estilos generales para cada comentario */
+    .comment {
+      background: var(--commentBg); /* Fondo del comentario */
+      border-radius: 5px;            /* Bordes redondeados */
+      padding: 10px;                 /* Espacio interno */
+      margin-bottom: 10px;           /* Separación entre comentarios */
+      display: flex;                 /* Usamos flexbox para alinear avatar y contenido */
+      align-items: flex-start;       /* Alineación vertical */
+    }
+    /* Estilos para el avatar */
+    .comment .avatar {
+      width: 40px;         /* Ancho */
+      height: 40px;        /* Alto */
+      border-radius: 50%;  /* Circular */
+      object-fit: cover;   /* Ajuste de imagen */
+      flex-shrink: 0;      /* No se reduce */
+      margin-right: 10px;  /* Espacio a la derecha */
+    }
+    /* Contenedor del cuerpo del comentario (texto y acciones) */
+    .comment .comment-body {
+      flex: 1; /* Ocupa el espacio restante */
+    }
+    /* Contenedor del texto del comentario */
+    .comment .comment-text {
+      margin-bottom: 10px;
+    }
+    /* Nombre del usuario */
+    .comment .comment-text strong {
+      font-size: 1rem;
+      margin-bottom: 5px;
+      display: block;
+    }
+    /* Texto del comentario */
+    .comment .comment-text p {
+      font-size: 0.9rem;
+      margin: 0;
+      line-height: 1.4;
+    }
+    /* Contenedor de acciones (likes, dislikes, etc.) */
+    .comment .comment-actions {
+      display: flex;
+      gap: 10px;           /* Espacio entre elementos */
+      align-items: center; /* Alineación vertical */
+      font-size: 0.8rem;
+    }
+    /* Botón de "Responder" */
+    .reply-button {
+      font-size: 0.8rem;
+      background: transparent;
+      border: none;
+      color: var(--green);
+      text-decoration: underline;
+      cursor: pointer;
+    }
+    /* Bloque de cita (fragmento del mensaje original) */
+    .quote {
+      font-size: 0.8rem;
+      background: rgba(0, 0, 0, 0.1);
+      padding: 5px;
+      border-left: 3px solid var(--green);
+      margin-bottom: 10px;
+    }
+    /* Estilos para las respuestas: se indentan */
+    .replies .comment {
+      margin-left: 25px;
+    }
+    /* Media Query para móviles (pantallas pequeñas) */
+    @media(max-width: 480px) {
+      .comment {
+        flex-direction: column;    /* Apila los elementos en columna */
+        align-items: flex-start;
+      }
+      .comment .avatar {
+        margin-bottom: 10px;       /* Espacio debajo del avatar */
+        margin-right: 0;
+        align-self: flex-start;
+      }
+      .comment .comment-body, 
+      .comment .comment-text {
+        width: 100%;
+        text-align: left;
+      }
+      .comment .comment-actions {
+        justify-content: flex-start;
+        width: 100%;
+      }
+      .quote {
+        width: 100%;
+      }
+    }
+
+
+
+    
+    /* =================== */
+    /* MODAL DE CALIFICACIÓN */
+    /* =================== */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 2000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      background: rgba(0,0,0,0.7);
+    }
+    .modal-content {
+      background: var(--rightBg);
+      margin: 10% auto;
+      padding: 20px;
+      border-radius: 8px;
+      width: 90%;
+      max-width: 400px;
+      text-align: center;
+      color: #fff;
+      position: relative;
+    }
+    .modal-content h3 {
+      margin-bottom: 15px;
+    }
+    .stars {
+      margin: 15px 0;
+    }
+    .stars i {
+      font-size: 2rem;
+      color: #ccc;
+      cursor: pointer;
+      transition: color 0.2s;
+    }
+    .stars i.hovered,
+    .stars i.selected {
+      color: var(--green);
+    }
+    .modal .close {
+      position: absolute;
+      top: 15px;
+      right: 20px;
+      font-size: 1.5rem;
+      color: #fff;
+      cursor: pointer;
+    }
+    .rating-info {
+      margin-top: 10px;
+      font-size: 0.9rem;
+      color: #fff;
+    }
+    .modal-content button {
+      background: transparent;
+      color: var(--light);
+      border: 1px solid var(--light);
+      padding: 8px 15px;
+      border-radius: 5px;
+      font-size: 0.9rem;
+      cursor: pointer;
+      transition: background 0.3s, color 0.3s;
+      min-width: 150px;
+    }
+    .modal-content button:hover {
+      background: rgba(255, 255, 255, 0.2);
+    }
+    
+    /* =================== */
+    /* FOOTER              */
+    /* =================== */
+    footer {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: var(--darkLeft);
+      color: #fff;
+      text-align: center;
+      padding: 10px 20px;
+      font-size: 0.8rem;
+    }
+    footer a {
+      color: var(--green);
+      text-decoration: none;
+      margin: 0 5px;
+    }
+    footer a:hover {
+      text-decoration: underline;
+    }
+    
+
+
+/* =================== */
+    /* RESPONSIVE          */
+    /* =================== */
+    @media (max-width: 768px) {
+      .book-data-section, .book-columns, .book-extra-section, .author, .comments-section {
+        flex-direction: column;
+        text-align: center;
+      }
+      .column-cover, .column-info {
+        max-width: 100%;
+        margin-right: 0;
+      }
+      .column-cover img {
+        min-height: 300px;
+        object-fit: cover;
+      }
+      .column-info h2, .column-info h3 {
+        text-align: center;
+      }
+      /* Centramos la sinopsis en móviles */
+      .column-info p {
+        text-align: center;
+        margin: 0 15px 15px;
+      }
+      .book-extra-section {
+        flex-direction: column;
+      }
+      .extra-column {
+        width: 100%;
+      }
+      .extra-column.data {
+        text-align: center;
+      }
+      .author {
+        text-align: center;
+      }
+    }
+    
+    /* =================== */
+    /* ESTILO PARA LAS ESTRELLAS */
+    /* =================== */
+    .rating {
+      color: yellow;
+    }
+    .data-green {
+      color: var(--green);
+    }
+    
+    /* =================== */
+    /* MODAL DE CALIFICACIÓN */
+    /* =================== */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 2000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      background: rgba(0,0,0,0.7);
+    }
+    .modal-content {
+      background: var(--rightBg);
+      margin: 10% auto;
+      padding: 20px;
+      border-radius: 8px;
+      width: 90%;
+      max-width: 400px;
+      text-align: center;
+      color: var(--light);
+      position: relative;
+    }
+    .modal-content h3 {
+      margin-bottom: 15px;
+    }
+    .stars {
+      margin: 15px 0;
+    }
+    .stars i {
+      font-size: 2rem;
+      color: #ccc;
+      cursor: pointer;
+      transition: color 0.2s;
+    }
+    .stars i.hovered,
+    .stars i.selected {
+      color: var(--green);
+    }
+    .modal .close {
+      position: absolute;
+      top: 15px;
+      right: 20px;
+      font-size: 1.5rem;
+      color: var(--light);
+      cursor: pointer;
+    }
+    .rating-info {
+      margin-top: 10px;
+      font-size: 0.9rem;
+    }
+    /* Botón del popup: igual a rate-button */
+    .modal-content button {
+      background: transparent;
+      color: var(--light);
+      border: 1px solid var(--light);
+      padding: 8px 15px;
+      border-radius: 5px;
+      font-size: 0.9rem;
+      cursor: pointer;
+      transition: background 0.3s, color 0.3s;
+      min-width: 150px;
+    }
+    .modal-content button:hover {
+      background: rgba(255, 255, 255, 0.2);
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    /* =================== */
+    /* AJUSTES PARA MÓVILES */
+    /* =================== */
+    @media(max-width: 768px) {
+      .main-container {
+        flex-direction: column;
+      }
+      .right-zone {
+        margin-left: 0;
+        padding: 10px;
+      }
+      .inner-container .content {
+        flex-direction: column;
+      }
+      /* Portada en móvil: la imagen se hace más grande */
+      .cover {
+        width: 100%;
+        max-width: 100%;
+        margin-bottom: 20px;
+      }
+      .cover img {
+        width: 100%;
+        height: auto;
+        min-height: 300px;
+        object-fit: cover;
+        border-radius: 10px;
+      }
+      /* Centrar títulos y subtítulos */
+      .book-info h2,
+      .book-info h3 {
+        text-align: center;
+      }
+      .book-info p {
+        text-align: justify;
+        margin: 0 15px 15px;
+        font-size: 0.9rem;
+      }
+      /* Ajustar bloque meta para optimizar espacio */
+      .meta {
+        margin-top: 15px;
+        padding: 0 20px;
+      }
+      .meta p {
+        margin: 10px 0;
+        font-size: 0.9rem;
+      }
+      /* Espaciado adicional para comentarios */
+      .comment-group {
+        margin-top: 25px;
+        margin-bottom: 25px;
+      }
+      .comment-original,
+      .comment-reply {
+        margin-bottom: 15px;
+      }
+      .comments-feed {
+        padding: 0 10px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- =================== -->
+  <!-- HEADER MÓVIL        -->
+  <!-- =================== -->
+  <header class="mobile-header">
+    <i class="fas fa-bars hamburger" id="hamburgerBtn"></i>
+    <span style="color:#fff; font-size:1.2rem;">Menú</span>
+  </header>
+  
+  <div class="main-container">
+    <!-- =================== -->
+    <!-- BARRA IZQUIERDA     -->
+    <!-- =================== -->
+    <div class="left-zone closed" id="leftZone">
+      <!-- Botón de cierre en móvil -->
+      <div class="close-menu" id="closeMenuBtn"><i class="fas fa-times"></i></div>
+      <!-- Menú lateral -->
+      <div class="left-menu">
+        <a href="#"><i class="fas fa-sign-out-alt"></i> Regresar al inicio</a>
+      </div>
+      <!-- Reproductor de audio -->
+      <div class="audio-player">
+        <div class="player-cover">
+          <img src="img/portada-audio.jpg" alt="Portada del Audiolibro">
+        </div>
+        <div class="controls">
+          <button id="playPauseBtn"><i class="fas fa-play"></i></button>
+          <div class="progress-container" id="progressContainer">
+            <div class="progress-bar" id="progressBar"></div>
+          </div>
+          <div class="time" id="timeDisplay">0:00 / 0:00</div>
+          <div class="volume">
+            <i id="volDown" class="fas fa-volume-down"></i>
+            <input type="range" id="volumeSlider" min="0" max="1" step="0.01" value="1">
+            <i id="volUp" class="fas fa-volume-up"></i>
+          </div>
+          <!-- Audio principal -->
+          <audio id="mainAudio" preload="metadata">
+            <source src="audios/AUDIOLIBRO_COMPLETO_ALCANZA_TU_GRANDEZA.mp3" type="audio/mpeg">
+            Tu navegador no soporta el elemento de audio.
+          </audio>
+        </div>
+      </div>
+      <!-- Lista de capítulos -->
+      <div class="playlist">
+        <h3>Capítulos</h3>
+        <ul id="chapterList">
+          <li class="chapter-item" data-src="audios/morningnews_capitulo1.mp3">Capítulo 1: Introducción</li>
+          <li class="chapter-item" data-src="audios/morningnews_capitulo2.mp3">Capítulo 2: Desarrollo</li>
+          <li class="chapter-item" data-src="audios/morningnews_capitulo3.mp3">Capítulo 3: Clímax</li>
+          <li class="chapter-item" data-src="audios/morningnews_capitulo4.mp3">Capítulo 4: Conclusión</li>
+        </ul>
+      </div>
+      <!-- Descargas -->
+      <div class="downloads">
+        <h3>Materiales y Descargas</h3>
+        <ul>
+          <li><a href="material1.pdf" target="_blank"><i class="fas fa-file-pdf"></i> Guía de Estudio</a></li>
+          <li><a href="material2.docx" target="_blank"><i class="fas fa-file-word"></i> Resumen Ejecutivo</a></li>
+          <li><a href="material3.xlsx" target="_blank"><i class="fas fa-file-excel"></i> Datos Estadísticos</a></li>
+          <li><a href="material4.pptx" target="_blank"><i class="fas fa-file-powerpoint"></i> Presentación</a></li>
+        </ul>
+      </div>
+    </div>
+    
+    <!-- =================== -->
+    <!-- ZONA DERECHA        -->
+    <!-- =================== -->
+    <div class="right-zone">
+      <div class="inner-container">
+        <!-- SECCIÓN PORTADA Y DESCRIPCIÓN DEL LIBRO -->
+        <div class="content">
+          <!-- Portada (a la izquierda) -->
+          <div class="cover">
+            <img src="img/portada-libro.jpg" alt="Portada del Audiolibro">
+          </div>
+          <!-- Descripción del Libro (a la derecha) -->
+          <div class="book-info">
+            <h2>Alcanza Tu grandeza</h2>
+            <h3>10 lecciones estratégicas para alcanzar tus metas y vivir con proposito.</h3>
+            <p>"Alcanza tu Grandeza" es un libro diseñado para guiarte en ese viaje. A través de 10 lecciones estratégicas, este libro te proporcionará las herramientas que necesitas para definir tus objetivos, mantener el enfoque y superar los desafíos que se presenten en el camino.</p>
+          </div>
+        </div>
+        
+<!-- SECCIÓN DATOS DEL LIBRO - PARTE INFERIOR -->
+<div class="book-extra-section">
+  <!-- Columna 1: Datos del Libro y Botón de Calificación -->
+  <div class="extra-column data">
+    <p><strong>Autor:</strong> Luis Germán Gil Galeano</p>
+    <p><strong>Género:</strong> No Ficción, Desarrollo Personal</p>
+    <p><strong>Calificación:</strong> <span class="rating">★★★★☆</span></p>
+    <p>Total calificaciones: <span class="data-green">123</span> | Puntaje promedio: <span class="data-green">4.9/5</span></p>
+    <button class="rate-button" id="openModal">Calificar Audiolibro</button>
+  </div>
+  <!-- Columna 2: Botones de Compra y Sección Amazon -->
+  <div class="extra-column purchase">
+    <button class="btn"><i class="fa-solid fa-cart-shopping"></i> Versión ebook</button>
+    <button class="btn"><i class="fa-solid fa-cart-shopping"></i> Versión Papel</button>
+    <div class="amazon">
+      <p>Compra mi libro en Amazon</p>
+      <img src="img/amazon-logo.png" alt="Amazon">
+    </div>
+  </div>
+</div>
+
+
+
+        <!-- SECCIÓN BIOGRAFÍA DEL AUTOR -->
+        <div class="author">
+          <img src="img/autor.png" alt="Foto del Autor">
+          <div class="author-info">
+            <h3>Biografía De: Luis Germán Gil Galeano</h3>
+            <p>Luis Germán Gil Galeano es un facilitador espiritual y creador de contenido, dedicado al crecimiento personal y al emprendimiento por internet, con un enfoque que combina productividad, bienestar y espiritualidad para ayudar a otros a alcanzar su máximo potencial.</p>
+          </div>
+        </div>
+        <!-- SECCIÓN COMENTARIOS -->
+        <div class="comments-section">
+          <!-- Formulario para nuevo comentario -->
+          <div class="comment-form">
+            <textarea placeholder="Deja aquí tu comentario..."></textarea>
+            <div class="comment-btn-container">
+              <button>Enviar comentario</button>
+            </div>
+          </div>
+          <!-- Aquí podrías incluir el feed de comentarios, si lo deseas -->
+
+<!---------------------------------------------
+  --------------------------------------------- 
+  Sección principal de comentarios 
+  
+  ---------------------------------------------
+----------------------------------------------->
+
+
+<div class="comments-section">
+  <!-- Grupo de comentario 1: Comentario original y respuestas -->
+  <div class="comment-group">
+    <!-- Comentario original -->
+    <div class="comment comment-original">
+      <img src="img/avatar1.png" alt="Avatar de Ana" class="avatar">
+      <div class="comment-body">
+        <div class="comment-text">
+          <strong>Ana</strong>
+          <p>Me encantó el libro, realmente me ayudó a enfocarme en mis objetivos.</p>
+        </div>
+        <div class="comment-actions">
+          <i class="fas fa-thumbs-up"></i><span>10</span>
+          <i class="fas fa-thumbs-down"></i><span>1</span>
+          <span>2 respuestas</span>
+          <button class="reply-button">Responder</button>
+        </div>
+      </div>
+    </div>
+    <!-- Respuestas al comentario original -->
+    <div class="replies">
+      <!-- Primera respuesta con cita (estilo WhatsApp) -->
+      <div class="comment comment-reply">
+        <img src="img/avatar4.png" alt="Avatar de Luis" class="avatar">
+        <div class="comment-body">
+          <!-- Fragmento del mensaje original -->
+          <div class="quote">
+            <p>Me encantó el libro, realmente me ayudó a enfocarme en mis objetivos.</p>
+          </div>
+          <!-- Texto de la respuesta -->
+          <div class="comment-text">
+            <strong>Luis</strong>
+            <p>Hola Ana, ¿y cuál capítulo es tu favorito?</p>
+          </div>
+          <div class="comment-actions">
+            <i class="fas fa-thumbs-up"></i><span>3</span>
+            <i class="fas fa-thumbs-down"></i><span>0</span>
+            <span>0 respuestas</span>
+            <button class="reply-button">Responder</button>
+          </div>
+        </div>
+      </div>
+      <!-- Segunda respuesta (opcional, también con cita) -->
+      <div class="comment comment-reply">
+        <img src="img/avatar1.png" alt="Avatar de Ana" class="avatar">
+        <div class="comment-body">
+          <!-- Aquí se puede mostrar una cita del mensaje al que se responde -->
+          <div class="quote">
+            <p>Hola Ana, ¿y cuál capítulo es tu favorito?</p>
+          </div>
+          <div class="comment-text">
+            <strong>Ana</strong>
+            <p>Mi favorito es el capítulo 3. ¡Gracias por preguntar, Luis!</p>
+          </div>
+          <div class="comment-actions">
+            <i class="fas fa-thumbs-up"></i><span>5</span>
+            <i class="fas fa-thumbs-down"></i><span>0</span>
+            <span>0 respuestas</span>
+            <button class="reply-button">Responder</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Grupo de comentario 2 -->
+  <div class="comment-group">
+    <div class="comment comment-original">
+      <img src="img/avatar2.png" alt="Avatar de Carlos" class="avatar">
+      <div class="comment-body">
+        <div class="comment-text">
+          <strong>Carlos</strong>
+          <p>Excelente contenido, lo recomiendo a todos.</p>
+        </div>
+        <div class="comment-actions">
+          <i class="fas fa-thumbs-up"></i><span>5</span>
+          <i class="fas fa-thumbs-down"></i><span>0</span>
+          <span>0 respuestas</span>
+          <button class="reply-button">Responder</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Grupo de comentario 3 -->
+  <div class="comment-group">
+    <div class="comment comment-original">
+      <img src="img/avatar3.png" alt="Avatar de María" class="avatar">
+      <div class="comment-body">
+        <div class="comment-text">
+          <strong>María</strong>
+          <p>Muy inspirador, cada lección me aportó algo nuevo.</p>
+        </div>
+        <div class="comment-actions">
+          <i class="fas fa-thumbs-up"></i><span>8</span>
+          <i class="fas fa-thumbs-down"></i><span>2</span>
+          <span>0 respuestas</span>
+          <button class="reply-button">Responder</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- =================== -->
+  <!-- MODAL DE CALIFICACIÓN -->
+  <!-- =================== -->
+  <div id="ratingModal" class="modal">
+    <div class="modal-content">
+      <span class="close" id="closeModal">&times;</span>
+      <h3>Califica el Audiolibro</h3>
+      <div class="stars" id="starContainer">
+        <i class="fas fa-star" data-value="1"></i>
+        <i class="fas fa-star" data-value="2"></i>
+        <i class="fas fa-star" data-value="3"></i>
+        <i class="fas fa-star" data-value="4"></i>
+        <i class="fas fa-star" data-value="5"></i>
+      </div>
+      <div class="rating-info">
+        Total calificaciones: <span id="totalRatings" class="data-green">123</span> | Puntaje promedio: <span id="avgRating" class="data-green">4.9/5</span>
+      </div>
+      <button id="submitRating" class="rate-button">Enviar calificación</button>
+    </div>
+  </div>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <!-- ======================== -->
+  <!-- FOOTER             -->
+  <!-- =================== -->
+  <footer>
+    © 2025 www.docttus.com . Todos los derechos reservados. 
+    <a href="#">Términos y condiciones</a> | <a href="#">Política de privacidad</a>
+  </footer>
+  
+  <!-- =================== -->
+  <!-- SCRIPTS            -->
+  <!-- =================== -->
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      // Menú hamburguesa en móvil
+      const hamburgerBtn = document.getElementById('hamburgerBtn');
+      const leftZone = document.getElementById('leftZone');
+      const closeMenuBtn = document.getElementById('closeMenuBtn');
+      
+      hamburgerBtn.addEventListener('click', () => {
+        leftZone.classList.toggle('open');
+      });
+      
+      closeMenuBtn.addEventListener('click', () => {
+        leftZone.classList.remove('open');
+      });
+      
+      // Reproductor de audio
+      const mainAudio = document.getElementById('mainAudio');
+      const playPauseBtn = document.getElementById('playPauseBtn');
+      const progressContainer = document.getElementById('progressContainer');
+      const progressBar = document.getElementById('progressBar');
+      const timeDisplay = document.getElementById('timeDisplay');
+      const volumeSlider = document.getElementById('volumeSlider');
+      const chapterList = document.getElementById('chapterList');
+      const volDownIcon = document.getElementById('volDown');
+      const volUpIcon = document.getElementById('volUp');
+      
+      playPauseBtn.addEventListener('click', () => {
+        if (mainAudio.paused) {
+          mainAudio.play();
+          playPauseBtn.innerHTML = '<i class="fas fa-pause"></i>';
+        } else {
+          mainAudio.pause();
+          playPauseBtn.innerHTML = '<i class="fas fa-play"></i>';
+        }
+      });
+      
+      mainAudio.addEventListener('timeupdate', updateProgress);
+      mainAudio.addEventListener('loadedmetadata', updateProgress);
+      
+      function updateProgress() {
+        const { currentTime, duration } = mainAudio;
+        const percent = (currentTime / duration) * 100;
+        progressBar.style.width = percent + '%';
+        timeDisplay.textContent = formatTime(currentTime) + ' / ' + formatTime(duration);
+        document.querySelectorAll('.chapter-item').forEach(item => {
+          const src = item.getAttribute('data-src');
+          item.classList.toggle('active', mainAudio.currentSrc.includes(src));
+        });
+      }
+      
+      function formatTime(time) {
+        if (isNaN(time)) return "0:00";
+        const minutes = Math.floor(time / 60);
+        let seconds = Math.floor(time % 60);
+        if (seconds < 10) seconds = "0" + seconds;
+        return minutes + ":" + seconds;
+      }
+      
+      function updateVolumeSliderBackground(slider) {
+        const value = slider.value;
+        const percentage = value * 100;
+        slider.style.background = `linear-gradient(90deg, var(--green) ${percentage}%, #fff ${percentage}%)`;
+      }
+      
+      volumeSlider.addEventListener('input', function() {
+        mainAudio.volume = this.value;
+        updateVolumeSliderBackground(volumeSlider);
+      });
+      
+      updateVolumeSliderBackground(volumeSlider);
+      
+      volDownIcon.addEventListener('click', () => {
+        let newValue = Math.max(parseFloat(volumeSlider.value) - 0.1, 0);
+        volumeSlider.value = newValue;
+        mainAudio.volume = newValue;
+        updateVolumeSliderBackground(volumeSlider);
+      });
+      
+      volUpIcon.addEventListener('click', () => {
+        let newValue = Math.min(parseFloat(volumeSlider.value) + 0.1, 1);
+        volumeSlider.value = newValue;
+        mainAudio.volume = newValue;
+        updateVolumeSliderBackground(volumeSlider);
+      });
+      
+      document.querySelectorAll('.chapter-item').forEach(item => {
+        item.addEventListener('click', () => {
+          const src = item.getAttribute('data-src');
+          if (mainAudio.src !== src) {
+            mainAudio.src = src;
+          }
+          mainAudio.play();
+          playPauseBtn.innerHTML = '<i class="fas fa-pause"></i>';
+        });
+      });
+      
+      // Modal de calificación
+      const openModalBtn = document.getElementById('openModal');
+      const ratingModal = document.getElementById('ratingModal');
+      const closeModal = document.getElementById('closeModal');
+      const starContainer = document.getElementById('starContainer');
+      const stars = starContainer.querySelectorAll('i');
+      let selectedRating = 0;
+      
+      openModalBtn.addEventListener('click', () => {
+        ratingModal.style.display = 'block';
+      });
+      
+      closeModal.addEventListener('click', () => {
+        ratingModal.style.display = 'none';
+        clearStars();
+      });
+      
+      window.addEventListener('click', (e) => {
+        if (e.target === ratingModal) {
+          ratingModal.style.display = 'none';
+          clearStars();
+        }
+      });
+      
+      stars.forEach(star => {
+        star.addEventListener('mouseover', () => {
+          const val = star.getAttribute('data-value');
+          highlightStars(val);
+        });
+        star.addEventListener('mouseout', () => {
+          highlightStars(selectedRating);
+        });
+        star.addEventListener('click', () => {
+          selectedRating = star.getAttribute('data-value');
+          highlightStars(selectedRating);
+        });
+      });
+      
+      function highlightStars(rating) {
+        stars.forEach(star => {
+          if (star.getAttribute('data-value') <= rating) {
+            star.classList.add('selected');
+          } else {
+            star.classList.remove('selected');
+          }
+        });
+      }
+      
+      function clearStars() {
+        selectedRating = 0;
+        stars.forEach(star => star.classList.remove('selected'));
+      }
+      
+      document.getElementById('submitRating').addEventListener('click', () => {
+        alert('Has calificado con ' + selectedRating + ' estrellas.');
+        ratingModal.style.display = 'none';
+        clearStars();
+      });
+      
+      // Funcionalidad para el botón "Responder" en comentarios
+      document.querySelectorAll('.reply-button').forEach(button => {
+        button.addEventListener('click', function() {
+          const replyForm = this.nextElementSibling;
+          replyForm.style.display = replyForm.style.display === "block" ? "none" : "block";
+        });
+      });
+    });
+
+// Se añade un evento a cada botón "Responder" para, por ejemplo, mostrar un formulario de respuesta.
+document.querySelectorAll('.reply-button').forEach(button => {
+      button.addEventListener('click', function() {
+        // Aquí se podría implementar la lógica para mostrar/ocultar el formulario.
+        alert("Aquí se mostraría el formulario de respuesta.");
+      });
+    });
+
+
+  </script>
+</body>
+</html>

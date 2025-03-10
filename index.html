@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Docttus</title>
+  <!-- Enlace a FontAwesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <!-- Enlace al CSS general -->
+  <link rel="stylesheet" href="css/main.css" />
+</head>
+<body>
+
+  <!-- =====================================================
+       SECCIÓN 1: MENÚ PRINCIPAL
+  ===================================================== -->
+  <header>
+  <div class="logo">
+    <img src="img/logo.png" alt="Logo Docttus">
+  </div>
+  <div class="nav-login">
+    <!-- Botón Hamburguesa para móviles -->
+    <button class="hamburger" id="hamburger" aria-label="Abrir menú" aria-expanded="false">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+    <!-- Menú de navegación -->
+    <nav id="nav-menu" aria-label="Menú principal">
+  <a href="index.html">
+    <i class="fa-solid fa-house"></i>
+    Inicio
+  </a>
+  <a href="catalogo/catalogo.html">
+    <i class="fa-solid fa-book"></i>
+    Catálogo
+  </a>
+  <a href="eventos/index.html">
+    <i class="fa-solid fa-calendar"></i>
+    Eventos
+  </a>
+  <a href="blog/index.html">
+    <i class="fa-solid fa-newspaper"></i>
+    Blog
+  </a>
+  <a href="suscribete/index.html">
+    <i class="fa-solid fa-credit-card"></i>
+    Suscríbete
+  </a>
+  <a href="#" class="btn-login">
+    Login
+    
+  </a>
+</nav>
+  </div>
+</header>
+
+  <!-- =====================================================
+       SECCIÓN 2: HERO - CONTENIDO Y VIDEO INTEGRADO
+  ===================================================== -->
+  <section class="hero">
+    <div class="hero-content container">
+      <!-- Bloque de Texto del Hero -->
+      <div class="text-content">
+        <h1>Alcanza tu potencial<br>conéctate con la excelencia.</h1>
+        <p>Mira películas, programas de TV y mucho más de forma ilimitada</p>
+        <p class="price">$8,99 / por mes</p>
+        <button class="btn-primary">Suscríbete ahora</button>
+        <p>Comienza tu prueba gratuita de 7 días</p>
+      </div>
+      <!-- Bloque de Video Integrado -->
+      <div class="video-container">
+        <iframe src="https://iframe.mediadelivery.net/embed/77366/261ad885-ee3e-4731-9cae-a2fec1a3f7e2?autoplay=false&loop=false&muted=false&preload=true&responsive=true" allowfullscreen></iframe>
+      </div>
+    </div>
+  </section>
+
+  <!-- =====================================================
+       SECCIÓN 3: VIDEO 2
+  ===================================================== -->
+  <section class="section-3">
+    <div class="video">
+      <iframe src="https://iframe.mediadelivery.net/embed/77366/261ad885-ee3e-4731-9cae-a2fec1a3f7e2?autoplay=false&loop=false&muted=false&preload=true&responsive=true" allowfullscreen></iframe>
+    </div>
+    <div class="content">
+      <h2>Disfruta de tu contenido</h2>
+      <p>Accede a nuestra biblioteca y disfruta de series, películas, podcast y audiolibros. Aprende de expertos y alcanza tu máximo potencial en cualquier momento.</p>
+      <button class="btn-secondary">Ver Catálogo</button>
+    </div>
+  </section>
+
+  <!-- =====================================================
+       SECCIÓN 4: FICHAS PORTADAS PROGRAMAS
+  ===================================================== -->
+  <section class="section-4">
+    <h2 class="section-title">
+      <span class="dot">•</span> Toda la TV que amas
+    </h2>
+    <p class="section-subtitle">
+      Transmita temporadas completas de series exclusivas, episodios de la temporada actual, películas exitosas y programas para niños.
+    </p>
+    <div class="card-container">
+      <div class="card">
+        <img src="img/pelicula1.jpg" alt="La soltera">
+        <div class="card-content">
+          <p class="card-title">El Secreto</p>
+          <p class="card-genre">Ley de Atracción</p>
+        </div>
+      </div>
+      <div class="card">
+        <img src="img/pelicula2.jpg" alt="Abadía de Downton">
+        <div class="card-content">
+          <p class="card-title">Liderazgo MLM</p>
+          <p class="card-genre">Liderazgo</p>
+        </div>
+      </div>
+      <div class="card">
+        <img src="img/pelicula3.jpg" alt="Perdido en el espacio">
+        <div class="card-content">
+          <p class="card-title">Emprender Tecnológico</p>
+          <p class="card-genre">Emprendimiento</p>
+        </div>
+      </div>
+      <div class="card">
+        <img src="img/pelicula4.jpg" alt="Gran escape">
+        <div class="card-content">
+          <p class="card-title">Millonaria de los Vinos</p>
+          <p class="card-genre">Biografías</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =====================================================
+       SECCIÓN 5: IMAGEN DE DISPOSITIVOS
+  ===================================================== -->
+  <section class="section-5">
+    <h2>Mira en cualquier dispositivo</h2>
+    <p>Docttus funciona perfectamente en todos los tamaños de pantalla. Disfruta tu contenido en móviles, tablets y pantallas grandes.</p>
+    <img src="img/docttus-membresia.png" alt="Dispositivos">
+  </section>
+
+  <!-- =====================================================
+       SECCIÓN 6: TABLA DE PRECIOS
+  ===================================================== -->
+  <section class="section-6">
+    <h2>Planes y Precios</h2>
+    <div class="pricing-table">
+      <div class="pricing-card">
+        <h3>Básico</h3>
+        <p class="price">$5,99 / mes</p>
+        <ul>
+          <li>Acceso a contenido básico</li>
+          <li>Calidad SD</li>
+          <li>1 dispositivo</li>
+        </ul>
+        <a href="#" class="btn-select">Seleccionar</a>
+      </div>
+      <div class="pricing-card active">
+        <h3>Principiante</h3>
+        <p class="price">$9,99 / mes</p>
+        <ul>
+          <li>Acceso a todo el contenido</li>
+          <li>Calidad HD</li>
+          <li>3 dispositivos</li>
+        </ul>
+        <a href="#" class="btn-select">Seleccionar</a>
+      </div>
+      <div class="pricing-card">
+        <h3>Experto</h3>
+        <p class="price">$14,99 / mes</p>
+        <ul>
+          <li>Acceso ilimitado</li>
+          <li>Calidad 4K</li>
+          <li>5 dispositivos</li>
+        </ul>
+        <a href="#" class="btn-select">Seleccionar</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- =====================================================
+       SECCIÓN 7: PREGUNTAS FRECUENTES
+  ===================================================== -->
+  <section class="section-7">
+    <h2>Preguntas Frecuentes</h2>
+    <div class="accordion">
+      <div class="accordion-item">
+        <div class="accordion-header">¿Cómo puedo suscribirme?</div>
+        <div class="accordion-content">
+          <p>Haz clic en "Suscríbete ahora" en la sección de precios y sigue las instrucciones para registrarte.</p>
+        </div>
+      </div>
+      <div class="accordion-item">
+        <div class="accordion-header">¿Puedo cancelar mi suscripción en cualquier momento?</div>
+        <div class="accordion-content">
+          <p>Sí, puedes cancelar desde tu cuenta sin cargos adicionales.</p>
+        </div>
+      </div>
+      <div class="accordion-item">
+        <div class="accordion-header">¿Qué métodos de pago aceptan?</div>
+        <div class="accordion-content">
+          <p>Aceptamos tarjetas de crédito, débito y PayPal.</p>
+        </div>
+      </div>
+      <div class="accordion-item">
+        <div class="accordion-header">¿Puedo ver contenido en varios dispositivos?</div>
+        <div class="accordion-content">
+          <p>Sí, según el plan elegido, puedes ver contenido en 1, 3 o 5 dispositivos simultáneamente.</p>
+        </div>
+      </div>
+      <div class="accordion-item">
+        <div class="accordion-header">¿Hay una prueba gratuita disponible?</div>
+        <div class="accordion-content">
+          <p>Sí, ofrecemos 7 días de prueba gratuita para que pruebes todo el contenido.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =====================================================
+       SECCIÓN 8: FORMULARIO DE SUSCRIPCIÓN
+  ===================================================== -->
+  <div class="fila fila-formulario">
+    <div class="container-form">
+      <div class="form-col form-video">
+        <iframe src="https://iframe.mediadelivery.net/embed/77366/261ad885-ee3e-4731-9cae-a2fec1a3f7e2?autoplay=false&loop=false&muted=false&preload=true&responsive=true" allowfullscreen></iframe>
+      </div>
+      <div class="form-col form-content">
+        <h2 class="titulo-formulario">Prueba algunas de nuestras clases</h2>
+        <p class="subtitulo-formulario">Ingresa tu email y recibe muestras de nuestras clases favoritas.</p>
+        <form>
+          <input type="email" placeholder="Ingresa tu correo electrónico" class="input-email" />
+          <button type="submit" class="btn-suscribir">Suscribir</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- =====================================================
+       SECCIÓN 9: PIE DE PÁGINA
+  ===================================================== -->
+  <footer class="footer-section">
+    <div class="footer-container">
+      <div class="footer-column">
+        <img src="img/logo.png" alt="Logo" class="footer-logo">
+        <p>Somos una plataforma educativa que ofrece recursos de alta calidad diseñados por expertos.</p>
+      </div>
+      <div class="footer-column">
+        <h4>Explora</h4>
+        <ul class="footer-menu">
+          <li><a href="index.html">Inicio</a></li>
+          <li><a href="blog/index.html">Blog</a></li>
+          <li><a href="#">Afiliados</a></li>
+          <li><a href="#">Empresa</a></li>
+          <li><a href="#">Ayuda</a></li>
+        </ul>
+      </div>
+      <div class="footer-column">
+        <h4>Servicios</h4>
+        <ul class="footer-menu">
+          <li><a href="#">Documentales</a></li>
+          <li><a href="audiolibros/index.html">Audio Libros</a></li>
+          <li><a href="eventos/index.html">Eventos</a></li>
+          <li><a href="cursos/index.html">Cursos</a></li>
+          <li><a href="podcast/index.html">Podcast</a></li>
+        </ul>           
+      </div>
+      <div class="footer-column">
+        <h4>Contacto</h4>
+        <p>Bucaramanga, Santander, Colombia</p>
+        <p>+57 300 298 2107</p>
+        <p>info@luisgermangil.com</p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-bottom-container">
+        <p>
+          <span>&copy; 2025 Street Capital</span>
+          <span>Todos los derechos reservados.</span>
+        </p>
+        <div class="footer-links">
+          <a href="#" target="_blank">Privacidad</a>
+          <a href="#" target="_blank">Condiciones</a>
+          <a href="#" target="_blank">Preguntas</a>
+        </div>
+        <div class="social-icons">
+          <a href="https://www.instagram.com/luisgermangil/" target="_blank" aria-label="Instagram">
+            <div class="circle">
+              <!-- Ícono SVG de Instagram -->
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" width="20" height="20" stroke-width="2">
+                <path d="M4 4m0 4a4 4 0 0 1 4 -4h8a4 4 0 0 1 4 4v8a4 4 0 0 1 -4 4h-8a4 4 0 0 1 -4 -4v-8z"></path>
+                <path d="M12 12m-3 0a3 3 0 1 0 6 0a3 3 0 1 0 -6 0"></path>
+                <path d="M16.5 7.5l0 .01"></path>
+              </svg>
+            </div>
+          </a>
+          <a href="https://www.facebook.com/luisgermangilgaleano" target="_blank" aria-label="Facebook">
+            <div class="circle">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" width="20" height="20" stroke-width="2">
+                <path d="M7 10v4h3v7h4v-7h3l1 -4h-4v-2a1 1 0 0 1 1 -1h3v-4h-3a5 5 0 0 0 -5 5v2h-3"></path>
+              </svg>
+            </div>
+          </a>
+          <a href="https://www.youtube.com/@LuisGermanGilGaleano" target="_blank" aria-label="YouTube">
+            <div class="circle">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" width="20" height="20" stroke-width="2">
+                <path d="M2 8a4 4 0 0 1 4 -4h12a4 4 0 0 1 4 4v8a4 4 0 0 1 -4 4h-12a4 4 0 0 1 -4 -4v-8z"></path>
+                <path d="M10 9l5 3l-5 3z"></path>
+              </svg>
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Botón flotante "Volver al inicio" -->
+  <div class="scroll-to-top" aria-label="Ir arriba">
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M19 14l-7-7-7 7" />
+    </svg>
+  </div>
+
+  <!-- =====================================================
+       JAVASCRIPT: FUNCIONALIDAD
+  ===================================================== -->
+  <script src="js/main.js" defer></script>
+</body>
+</html>

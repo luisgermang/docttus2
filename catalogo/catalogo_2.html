@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Catálogo Docttus</title>
+  <!-- Enlace a FontAwesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <!-- Enlaces a CSS -->
+  <link rel="stylesheet" href="../css/main.css">
+  <link rel="stylesheet" href="../css/sidebar.css">
+  <link rel="stylesheet" href="../css/topbar.css">
+  <link rel="stylesheet" href="../css/catalogo.css">
+</head>
+<body>
+  <!-- SIDEBAR -->
+  <div class="sidebar">
+    <button class="sidebar-close" id="sidebar-close" aria-label="Cerrar menú">×</button>
+    <div class="logo">
+      <img src="img/logo.png" alt="Docttus" />
+    </div>
+    <hr class="logo-divider" />
+    <div class="menu-wrapper">
+      <ul class="menu">
+        <li><a href="../index.html"><i class="fa-solid fa-house"></i> Inicio</a></li>
+        <li><a href="catalogo.html"><i class="fa-solid fa-book"></i> Catálogo</a></li>
+        <li><a href="https://docttus.com/peliculas.html"><i class="fa-solid fa-film"></i> Películas</a></li>
+        <li><a href="#"><i class="fa-solid fa-tv"></i> Series</a></li>
+        <li><a href="#"><i class="fa-solid fa-microphone"></i> Podcast</a></li>
+        <li><a href="#"><i class="fa-solid fa-chalkboard-teacher"></i> Cursos</a></li>
+        <li><a href="https://docttus.com/audiolibros.html"><i class="fa-solid fa-book-open"></i> Audio Libros</a></li>
+        <li class="divider"></li>
+        <li class="new-menu"><a href="#"><i class="fa-solid fa-calendar"></i> Eventos</a></li>
+        <li class="new-menu"><a href="#"><i class="fa-solid fa-newspaper"></i> Blog</a></li>
+        <li class="divider"></li>
+        <li class="pro-card-li">
+          <div class="pro-card">
+            <div class="pro-icon"><i class="fa-solid fa-crown"></i></div>
+            <div class="pro-title">Actualizar a Pro <i class="fa-solid fa-fire"></i></div>
+            <p>Obtén acceso a funciones y contenido premium</p>
+            <button class="pro-button">Actualizar ahora</button>
+          </div>
+        </li>
+        <li><a href="#"><i class="fa-solid fa-gear"></i> Configuración</a></li>
+        <li><a href="https://docttus.com/login.html"><i class="fa-solid fa-right-from-bracket"></i> Log Out</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- TOPBAR -->
+  <div class="topbar">
+    <div class="topbar-left">
+      <button class="hamburger" id="hamburger" aria-label="Abrir menú" aria-expanded="false">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <div class="topbar-center">
+      <div class="search-container">
+        <button class="search-button" id="search-button">
+          <i class="fa-solid fa-magnifying-glass"></i>
+        </button>
+        <input type="text" id="search-input" class="search-input hidden" placeholder="Buscar..." />
+      </div>
+    </div>
+    <div class="topbar-right">
+      <div class="icons">
+        <div class="notification">
+          <div class="icon-circle">
+            <i class="fa-solid fa-bell"></i>
+            <span class="notification-badge">3</span>
+          </div>
+        </div>
+        <div class="profile" id="profile">
+          <img src="../img/perfil.png" alt="Perfil" />
+          <div class="dropdown">
+            <a href="#"><i class="fa-solid fa-gear"></i> Configuración</a>
+            <a href="#"><i class="fa-solid fa-right-from-bracket"></i> Cerrar sesión</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Menú de búsqueda para móviles -->
+  <div class="mobile-search-menu" id="mobile-search-menu">
+    <input type="text" placeholder="Buscar..." />
+  </div>
+
+  <!-- CONTENIDO PRINCIPAL -->
+  <div class="main-content">
+    <!-- Slider -->
+    <div class="slider-container">
+      <div class="slide" style="background-image: url('img/imagen1.jpg');">
+        <div class="content">
+          <h2 class="title">El Padrino</h2>
+          <p class="description">Una épica saga sobre la familia Corleone y su imperio criminal en el Nueva York de posguerra.</p>
+          <div class="rating">
+            <span class="stars">★★★★☆</span>
+            <span class="score">123 calificaciones | 4.9/5</span>
+          </div>
+          <div class="buttons-container">
+            <button class="btn trailer-btn" onclick="showTrailer('el-padrino')">
+              <i class="fas fa-play"></i> Trailer
+            </button>
+            <a href="movies/el-padrino.html" class="btn play-btn-round">
+              <i class="fas fa-play"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="slide" style="background-image: url('img/imagen2.jpg');">
+        <div class="content">
+          <h2 class="title">Interestelar</h2>
+          <p class="description">Un equipo de astronautas viaja a través de un agujero de gusano en busca de un nuevo hogar para la humanidad.</p>
+          <div class="rating">
+            <span class="stars">★★★★☆</span>
+            <span class="score">123 calificaciones | 4.9/5</span>
+          </div>
+          <div class="buttons-container">
+            <button class="btn trailer-btn" onclick="showTrailer('el-padrino')">
+              <i class="fas fa-play"></i> Trailer
+            </button>
+            <a href="movies/el-padrino.html" class="btn play-btn-round">
+              <i class="fas fa-play"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="slide" style="background-image: url('img/imagen3.jpg');">
+        <div class="content">
+          <h2 class="title">Pulp Fiction</h2>
+          <p class="description">Historias entrelazadas de crimen, redención y caos en Los Ángeles, dirigidas por Quentin Tarantino.</p>
+          <div class="rating">
+            <span class="stars">★★★★☆</span>
+            <span class="score">123 calificaciones | 4.9/5</span>
+          </div>
+          <div class="buttons-container">
+            <button class="btn trailer-btn" onclick="showTrailer('el-padrino')">
+              <i class="fas fa-play"></i> Trailer
+            </button>
+            <a href="movies/el-padrino.html" class="btn play-btn-round">
+              <i class="fas fa-play"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="nav-buttons">
+        <button class="nav-btn" onclick="prevSlide()">❮</button>
+        <button class="nav-btn" onclick="nextSlide()">❯</button>
+      </div>
+      <div class="dots">
+        <span class="dot" onclick="goToSlide(0)"></span>
+        <span class="dot" onclick="goToSlide(1)"></span>
+        <span class="dot" onclick="goToSlide(2)"></span>
+      </div>
+    </div>
+
+   <!--------------------------------
+      -- Sección Podcast Destacados -- 
+     ------------------------------------>
+<div class="podcast-section">
+  <div class="header-container">
+    <span></span>
+    Podcast Destacados
+  </div>
+  <div class="podcast-content">
+    <div class="podcast-card">
+      <div class="top-label">TOP<br>1</div>
+      <img src="img/avatar1.png" alt="Foto" class="card-image">
+      <h2>Triunfadores</h2>
+      <p>Emprendedores</p>
+      <div class="rating">★★★★★</div>
+      <p>Total calificaciones: 123 | Puntaje promedio: 4.9/5</p>
+      <a href="podcast/triunfadores.html" class="mic-icon">
+        <i class="fas fa-microphone"></i>
+      </a>
+    </div>
+    <div class="podcast-card">
+      <div class="top-label">TOP<br>2</div>
+      <img src="img/avatar2.png" alt="Foto" class="card-image">
+      <h2>Éxito Diario</h2>
+      <p>Motivación</p>
+      <div class="rating">★★★★★</div>
+      <p>Total calificaciones: 200 | Puntaje promedio: 5.0/5</p>
+      <a href="podcast/exito-diario.html" class="mic-icon">
+        <i class="fas fa-microphone"></i>
+      </a>
+    </div>
+    <div class="podcast-card">
+      <div class="top-label">TOP<br>3</div>
+      <img src="img/avatar3.png" alt="Foto" class="card-image">
+      <h2>Negocios Hoy</h2>
+      <p>Finanzas</p>
+      <div class="rating">★★★★☆</div>
+      <p>Total calificaciones: 150 | Puntaje promedio: 4.7/5</p>
+      <a href="podcast/negocios-hoy.html" class="mic-icon">
+        <i class="fas fa-microphone"></i>
+      </a>
+    </div>
+    <div class="podcast-card">
+      <div class="top-label">TOP<br>4</div>
+      <img src="img/avatar4.png" alt="Foto" class="card-image">
+      <h2>Innovadores</h2>
+      <p>Tecnología</p>
+      <div class="rating">★★★★☆</div>
+      <p>Total calificaciones: 180 | Puntaje promedio: 4.8/5</p>
+      <a href="podcast/innovadores.html" class="mic-icon">
+        <i class="fas fa-microphone"></i>
+      </a>
+    </div>
+    <div class="podcast-card">
+      <div class="top-label">TOP<br>5</div>
+      <img src="img/portada-podcast.jpg" alt="Foto" class="card-image">
+      <h2>Podcast Destacado</h2>
+      <p>Podcast Principal</p>
+      <div class="rating">★★★★★</div>
+      <p>Total calificaciones: 250 | Puntaje promedio: 5.0/5</p>
+      <a href="podcast/destacado.html" class="mic-icon">
+        <i class="fas fa-microphone"></i>
+      </a>
+    </div>
+  </div>
+</div>
+
+    <!-- Sección Cursos Destacados -->
+<div class="courses-section">
+  <div class="header-container">
+    <span></span>
+    Cursos Destacados
+  </div>
+  <div class="courses-container">
+    <div class="course-card">
+      <img src="img/course1.png" alt="Curso 1">
+      <h2>Curso de Programación</h2>
+      <p>Tecnología</p>
+      <div class="rating">★★★★★</div>
+      <p>Total calificaciones: 100 | Puntaje promedio: 4.9/5</p>
+      <a href="courses/programacion.html" class="course-icon">
+        <i class="fas fa-play"></i>
+      </a>
+    </div>
+    <div class="course-card">
+      <img src="img/course2.png" alt="Curso 2">
+      <h2>Marketing Digital</h2>
+      <p>Negocios</p>
+      <div class="rating">★★★★☆</div>
+      <p>Total calificaciones: 85 | Puntaje promedio: 4.7/5</p>
+      <a href="courses/marketing.html" class="course-icon">
+        <i class="fas fa-play"></i>
+      </a>
+    </div>
+  </div>
+</div>
+  </div>
+
+  <!-- Contenedor del Popup de Trailer -->
+<div id="trailer-popup" class="trailer-popup">
+  <span class="close-trailer" onclick="hideTrailer()"><i class="fas fa-times-circle"></i></span>
+  <div class="trailer-content">
+    <iframe id="trailer-video" width="560" height="315" frameborder="0" allowfullscreen></iframe>
+  </div>
+</div>
+
+  <!-- Scripts -->
+  <script src="../js/menu-perfil.js" defer></script>
+  <script src="../js/menu-sidebar.js" defer></script>
+  <script src="../js/menu-busqueda.js" defer></script>
+  <script src="../js/slider.js" defer></script>
+  <script src="../js/trailer.js" defer></script> 
+  <script src="../js/reproductor-destacado.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,246 @@
+/* =========================
+   ESTILOS GLOBALES
+   ========================= */
+/* Elimina el subrayado por defecto en los enlaces */
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* =========================
+   ESTILOS PARA EL SIDEBAR
+   ========================= */
+
+/* Contenedor principal del sidebar */
+.sidebar {
+  width: 250px;                    /* Ancho fijo del sidebar */
+  background-color: #121b2a;         /* Fondo oscuro */
+  border-right: 1px solid #2d3a4d;    /* Línea de separación a la derecha */
+  display: flex;
+  flex-direction: column;
+  padding: 20px 0;                 /* Espaciado vertical interno */
+  position: fixed;                 /* Fijo en la pantalla */
+  top: 0;
+  left: 0;
+  bottom: 0;
+  z-index: 1000;
+}
+
+/* Contenedor del logo: se mueve hacia la derecha para alinearse con los ítems del menú */
+.sidebar .logo {
+  margin-bottom: 30px;
+  padding-left: 37.5px; /* Ajusta este valor según necesites */
+}
+
+
+/* Estilos para la imagen del logo */
+.sidebar .logo img {
+  display: block;   /* Elimina espacios indeseados alrededor de la imagen */
+  max-width: 70%;  /* Se adapta al tamaño del contenedor */
+  height: auto;
+}
+
+
+/* Línea separadora debajo del logo, extendida de margen a margen */
+.logo-divider {
+  display: block;              /* Asegura que se comporte como bloque */
+  width: 100%;                 /* Ocupa el 100% del ancho del contenedor */
+  border: none;                /* Elimina bordes por defecto */
+  border-bottom: 1px solid #2d3a4d; /* Agrega la línea inferior */
+  margin-bottom: 30px;         /* Separación inferior */
+}
+
+
+
+/* Contenedor del menú (ocupa el espacio restante) */
+.menu-wrapper {
+  flex: 1;
+  width: 100%;
+}
+
+/* Lista de menú sin viñetas */
+.sidebar ul.menu {
+  list-style: none;
+  width: 100%;
+  padding: 0;
+  margin: 0;
+}
+
+/* Cada ítem del menú */
+.sidebar ul.menu li {
+  width: 100%;
+  margin-bottom: 8px;              /* Espaciado entre ítems */
+}
+
+/* Estilos para los enlaces del menú */
+.sidebar ul.menu li a {
+  display: flex;                   /* Flex para alinear ícono y texto */
+  align-items: center;
+  gap: 8px;                        /* Espacio entre ícono y texto */
+  padding: 10px 20px;              /* Espaciado interno */
+  font-size: 16px;                 /* Tamaño de fuente */
+  color: #fff;                     /* Texto en blanco */
+  transition: color 0.2s ease;     /* Transición de color */
+}
+
+/* Cambio de color al pasar el cursor */
+.sidebar ul.menu li a:hover {
+  color: #00ff8f;
+}
+
+/* Estilos para los divisores (líneas horizontales) */
+.sidebar ul.menu li.divider {
+  border-top: 1px solid #2d3a4d;
+  margin: 15px 0;
+  padding: 0;
+}
+
+/* =========================
+   ESTILOS PARA LA TARJETA UPGRADE
+   ========================= */
+
+/* Contenedor de la tarjeta de upgrade; se centra horizontalmente */
+.pro-card-li {
+  margin: 15px auto;  /* Margen vertical y centrado horizontal */
+}
+
+/* Tarjeta upgrade: ancho reducido a 70% para mayor proporción */
+.pro-card {
+  width: 70%;                      /* Ancho ajustado a 70% del sidebar */
+  background-color: #2d3a4d;         /* Fondo acorde a la paleta */
+  border-radius: 15px;             /* Bordes redondeados */
+  padding: 10px;
+  text-align: center;
+  font-size: 14px;
+  margin: 0 auto;                  /* Centrado horizontal */
+  color: #fff;                     /* Todo el texto en blanco */
+}
+
+/* Ícono principal de la tarjeta upgrade */
+.pro-card .pro-icon {
+  width: 35px;
+  height: 35px;
+  background-color: #00ff8f;        /* Fondo distintivo para el ícono */
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 8px;              /* Centrado y con margen inferior */
+  color: #121b2a;                 /* Contraste con el fondo */
+  font-size: 16px;
+}
+
+/* Título de la tarjeta upgrade */
+.pro-card .pro-title {
+  font-size: 16px;
+  font-weight: bold;
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+}
+
+/* Ícono de fuego en el título se muestra en naranja */
+.pro-card .pro-title i.fa-fire {
+  color: orange;
+}
+
+/* Texto descriptivo de la tarjeta upgrade */
+.pro-card p {
+  font-size: 12px;
+  margin-bottom: 8px;
+}
+
+/* Botón de la tarjeta upgrade */
+.pro-card .pro-button {
+  background-color: #00ff8f;
+  color: #121b2a;
+  border: none;
+  padding: 6px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 12px;
+  transition: background-color 0.3s ease;
+}
+
+/* Cambio de color en el botón al pasar el cursor */
+.pro-card .pro-button:hover {
+  background-color: #00e680;
+}
+
+/* =========================
+   ALINEACIÓN DE LOS ÍTEMS DEL MENÚ
+   ========================= */
+/* Aplica un margen izquierdo de 37.5px a todos los enlaces de menú, excepto a la tarjeta upgrade */
+.sidebar ul.menu li:not(.pro-card-li) a {
+  margin-left: 37.5px;
+}
+
+
+/* /* ===========================================================================
+Responsividad del Sidebar para pantallas de 768px o menos 
+=========================================================================== */
+
+@media (max-width: 768px) {
+  .sidebar {
+    position: fixed;
+    left: -250px; /* Se oculta desplazado a la izquierda */
+    width: 250px;
+    top: 0;
+    bottom: 0;
+    transition: left 0.3s ease-in-out;
+    z-index: 1200;
+  }
+  
+  /* Cuando se añade la clase "active", el sidebar se muestra */
+  .sidebar.active {
+    left: 0;
+  }
+}
+
+@media (max-width: 768px) {
+  .sidebar.active {
+    left: 0; /* Cuando el sidebar tiene la clase active, se desplaza a la vista */
+  }
+}
+
+/* /* ===========================================================================
+ /* Botón para cerrar el sidebar */
+=========================================================================== */
+@media (max-width: 768px) {
+ 
+  .sidebar .sidebar-close {
+    display: block;
+    background: none;
+    border: none;
+    font-size: 24px;
+    color: #fff;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+    z-index: 1300;
+  }
+}
+
+/* Por defecto, oculta el botón */
+.sidebar-close {
+  display: none;
+}
+
+/* En pantallas de 768px o menos, se muestra el botón de cierre */
+@media (max-width: 768px) {
+  .sidebar-close {
+    display: block;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: none;
+    border: none;
+    font-size: 24px;
+    color: #fff;
+    cursor: pointer;
+    z-index: 1300;
+  }
+}

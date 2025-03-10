@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Formulario de Registro</title>
+  <style>
+    /* RESET BÁSICO */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #e2e2e2; /* gris claro de fondo */
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    /* CONTENEDOR PRINCIPAL */
+    .register-container {
+      width: 70%;
+      max-width: 900px;
+      background-color: #fff;
+      border-radius: 16px;
+      overflow: hidden;
+      display: flex;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    }
+
+    /* PANEL IZQUIERDO: FORMULARIO */
+    .left-panel {
+      flex: 0.45;
+      padding: 40px;
+      background-color: #fff;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    /* Logo área */
+    .logo-area {
+      display: flex;
+      align-items: center;
+      margin-bottom: 30px;
+    }
+    .logo-icon {
+      width: 32px;
+      height: 32px;
+      background-color: #2589fe;
+      border-radius: 6px;
+      margin-right: 10px;
+    }
+    .logo-text {
+      font-size: 18px;
+      font-weight: bold;
+      color: #2589fe;
+    }
+
+    .welcome-title {
+      font-size: 26px;
+      color: #222;
+      margin-bottom: 5px;
+    }
+    .subtitle {
+      font-size: 14px;
+      color: #666;
+      line-height: 1.5;
+      max-width: 300px;
+      margin-bottom: 25px;
+    }
+
+    .form-group {
+      margin-bottom: 15px;
+    }
+    .form-group label {
+      display: block;
+      font-size: 14px;
+      color: #333;
+      margin-bottom: 5px;
+    }
+    .form-group input {
+      width: 100%;
+      padding: 10px 12px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      outline: none;
+      font-size: 14px;
+      color: #333;
+      transition: border-color 0.3s;
+    }
+    .form-group input:focus {
+      border-color: #2589fe;
+    }
+
+    /* Botón Registrar */
+    .register-button {
+      width: 100%;
+      padding: 12px 0;
+      background-color: #2589fe;
+      color: #fff;
+      font-size: 15px;
+      font-weight: bold;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      margin-bottom: 15px;
+      transition: background-color 0.3s;
+    }
+    .register-button:hover {
+      background-color: #2a9e2a;
+    }
+
+    /* Botón Google */
+    .google-button {
+      width: 100%;
+      padding: 12px 0;
+      background-color: #fff;
+      color: #555;
+      font-size: 15px;
+      font-weight: bold;
+      border: 1px solid #ddd;
+      border-radius: 6px;
+      cursor: pointer;
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      transition: background-color 0.2s;
+    }
+    .google-button img {
+      width: 18px;
+      height: auto;
+    }
+    .google-button:hover {
+      background-color: #f5f5f5;
+    }
+
+    .login-link {
+      font-size: 14px;
+      color: #777;
+      margin-top: 10px;
+    }
+    .login-link a {
+      color: #2589fe;
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    /* PANEL DERECHO: Imagen de fondo */
+    .right-panel {
+      flex: 0.55;
+      background: url('img/pelicula8.jpg') no-repeat center center;
+      background-size: cover;
+      background-color: #fafafa;
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 992px) {
+      .register-container {
+        flex-direction: column;
+        width: 90%;
+      }
+      .left-panel, .right-panel {
+        border-radius: 0; 
+      }
+      .left-panel {
+        width: 100%;
+      }
+      .right-panel {
+        width: 100%;
+        height: 300px;
+      }
+    }
+    @media (max-width: 576px) {
+      .left-panel {
+        padding: 20px;
+      }
+      .right-panel {
+        height: 250px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="register-container">
+    <!-- PANEL IZQUIERDO: FORMULARIO -->
+    <div class="left-panel">
+      <!-- Logo Superior -->
+      <div class="logo-area">
+        <div class="logo-icon"></div>
+        <div class="logo-text">Docttus</div>
+      </div>
+
+      <!-- Texto de bienvenida -->
+      <h1 class="welcome-title">Crea tu cuenta</h1>
+      <p class="subtitle">
+        Regístrate y únete a una plataforma innovadora para aprender de los mejores.
+      </p>
+
+      <!-- Campos del formulario -->
+      <div class="form-group">
+        <label for="nameInput">Nombre completo</label>
+        <input type="text" id="nameInput" placeholder="Tu nombre completo" />
+      </div>
+      <div class="form-group">
+        <label for="emailInput">Correo electrónico</label>
+        <input type="email" id="emailInput" placeholder="ejemplo@tusitio.com" />
+      </div>
+      <div class="form-group">
+        <label for="passInput">Contraseña</label>
+        <input type="password" id="passInput" placeholder="••••••••" />
+      </div>
+      <div class="form-group">
+        <label for="confirmPassInput">Confirmar contraseña</label>
+        <input type="password" id="confirmPassInput" placeholder="••••••••" />
+      </div>
+
+      <!-- Botones de registro -->
+      <button class="register-button">Registrar</button>
+      <button class="google-button">
+        <img src="img/logogoogle.png" alt="google-logo" />
+        Registrar con Google
+      </button>
+
+      <!-- Enlace para iniciar sesión -->
+      <div class="login-link">
+        ¿Ya tienes cuenta? <a href="https://docttus.com/login.html">Inicia sesión</a>
+      </div>
+    </div>
+
+    <!-- PANEL DERECHO: Imagen de fondo -->
+    <div class="right-panel"></div>
+  </div>
+</body>
+</html>

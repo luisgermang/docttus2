@@ -1,0 +1,587 @@
+.main-content {
+  margin-top: 0;
+  margin-left: 250px;
+  padding: 0;
+  box-sizing: border-box;
+  overflow-x: hidden;
+}
+
+
+@media (max-width: 768px) {
+  .main-content {
+    margin-left: 0; /* Sin margen en móviles */
+    overflow-x: hidden; /* Evita scroll horizontal */
+  box-sizing: border-box;
+  }
+}
+
+
+  /**************************************
+   Slider Container 
+  ***************************************/
+
+.slider-container {
+  position: relative;
+  width: calc(100vw - 250px); /* Ancho completo menos el sidebar en escritorio */
+  height: 500px;
+  margin: 0;
+  overflow: hidden;
+  border-radius: 0;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+  box-sizing: border-box;
+}
+
+/* Slide */
+.slide {
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  transition: opacity 0.8s ease-in-out;
+}
+
+.slide.active {
+  opacity: 1;
+}
+
+.slide::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.7));
+}
+
+/* Contenido del Slide */
+.content {
+  position: absolute;
+  bottom: 60px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Centra horizontalmente los elementos hijos */
+  justify-content: center; /* Ajusta verticalmente si es necesario */
+  gap: 15px;
+  text-align: center;
+  width: 90%;
+  max-width: 600px;
+}
+
+/* Título */
+.title {
+  color: #fff;
+  font-size: 36px;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.8);
+  margin: 0;
+}
+
+/* Descripción */
+.description {
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 18px;
+  margin: 0;
+  text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.7);
+  line-height: 1.4;
+  width: 100%; /* Asegura que no se desplace */
+}
+
+/* Calificación */
+.rating {
+  color: #00ff8f;
+  font-size: 16px;
+  text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.7);
+  display: flex; /* Alinea estrellas y texto en una línea */
+  align-items: center;
+  gap: 10px; /* Espacio entre estrellas y texto */
+  flex-wrap: nowrap; /* Evita que se rompa en varias líneas */
+  justify-content: center; /* Centra horizontalmente */
+}
+
+.rating .stars {
+  margin-right: 0; /* Elimina margen derecho innecesario */
+}
+
+.rating .score {
+  color: rgba(255, 255, 255, 0.8);
+  white-space: nowrap; /* Evita que el texto se divida */
+}
+
+/* Botones */
+.buttons-container {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+}
+
+.btn {
+  padding: 12px 25px;
+  background-color: #00ff8f;
+  color: #121b2a;
+  border: none;
+  cursor: pointer;
+  font-size: 18px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-weight: bold;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  border-radius: 5px;
+}
+
+.btn:hover {
+  background-color: #00e680;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4);
+}
+
+.btn.trailer {
+  background-color: #fff;
+  color: #121b2a;
+  width: 50px;
+  height: 50px;
+  padding: 0;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+}
+
+.play-btn-round {
+  background-color: #00ff8f; /* Verde neón como el mic-icon */
+  color: #121b2a; /* Contraste oscuro */
+  width: 50px;
+  height: 50px;
+  padding: 0;
+  border-radius: 50%; /* Hace el botón redondo */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none; /* Quita el subrayado del enlace */
+  font-size: 16px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.play-btn-round:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4);
+  background-color: #00e680; /* Verde más oscuro al hover */
+}
+
+.btn.trailer:hover {
+  background-color: #e0e0e0;
+  color: #121b2a;
+}
+
+/* Botones de Navegación */
+.nav-buttons {
+  position: absolute;
+  top: 50%;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  transform: translateY(-50%);
+  z-index: 10;
+  padding: 0 47px 0 30px;
+  box-sizing: border-box;
+}
+
+.nav-btn {
+  background-color: rgba(0, 0, 0, 0.6);
+  color: #fff;
+  border: none;
+  padding: 15px;
+  cursor: pointer;
+  font-size: 24px;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+}
+
+.nav-btn:hover {
+  background-color: #00ff8f;
+  transform: scale(1.1);
+}
+
+/* Puntos de Navegación */
+.dots {
+  position: absolute;
+  bottom: 15px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 10px;
+  z-index: 10;
+  
+}
+
+.dot {
+  width: 10px;
+  height: 10px;
+  background-color: rgba(255, 255, 255, 0.5);
+  border-radius: 50%;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.dot.active {
+  background-color: #00ff8f;
+}
+
+/* Responsividad */
+@media (max-width: 768px) {
+  .slider-container {
+    width: 100vw;
+    height: 400px;
+  }
+
+  .content {
+    bottom: 30px;
+    left: 50%; /* Mantén el centrado horizontal */
+    transform: translateX(-50%); /* Corrige el desplazamiento */
+    text-align: center; /* Cambia de left a center para consistencia */
+    width: 90%;
+    gap: 10px;
+    align-items: center; /* Centra los elementos */
+  }
+
+  .title {
+    font-size: 24px;
+  }
+
+  .description {
+    font-size: 14px;
+    max-width: 80%;
+  }
+
+  .rating {
+    font-size: 14px;
+    gap: 5px;
+  }
+
+  .buttons-container {
+    gap: 10px;
+    justify-content: center; /* Cambia de flex-start a center */
+  }
+  .dots {
+    bottom: 10px; /* Baja los dots en móviles, pero no al borde */
+  }
+}
+
+/**************************************
+AQUI ESTA EL POP UP DEL TRAILER
+***************************************/
+
+.trailer-popup {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.8);
+  z-index: 2000;
+  display: none;
+  justify-content: center;
+  align-items: center;
+}
+
+.trailer-content {
+  position: relative;
+  width: 90%;
+  max-width: 800px;
+  aspect-ratio: 16 / 9;
+  background: #121b2a;
+  border: 2px solid #00ff8f;
+  border-radius: 15px;
+  padding: 0;
+  box-shadow: 0 0 20px rgba(0, 255, 143, 0.8);
+  overflow: hidden;
+}
+
+/*121b2a */
+
+.close-trailer {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  font-size: 32px;
+  color: #121b2a;
+  cursor: pointer;
+  background: #00e680;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: background 0.3s ease;
+  z-index: 2100;
+}
+
+.close-trailer:hover {
+  color: #000000;
+}
+
+#trailer-video {
+  width: 100%;
+  height: 100%;
+  border: none;
+  border-radius: 15px;
+  overflow: hidden;
+}
+
+@media (max-width: 768px) {
+   .trailer-content {
+    width: 95%;
+    max-width: 100%;
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+  }
+}
+
+/************************************************************************************
+AQUI TERMINA EL CSS DEL SLIDER Y DEL POP UP DEL TRAILER
+************************************************************************************/
+
+.podcast-section {
+  width: calc(100vw - 250px);
+  padding: 20px;
+  background: url('../catalogo/img/fondo2.jpg') no-repeat center center/cover;
+  background-color: #1b202b;
+  position: relative;
+  box-sizing: border-box;
+  /* quitamos display: flex y gap, lo manejamos con márgenes */
+  overflow-x: hidden;
+  z-index: 1;
+}
+
+.header-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 60px; /* Aumentado para dar más espacio */
+  font-size: 24px;
+  font-weight: bold;
+  color: #fff;
+  text-align: center;
+  justify-content: center;
+  position: relative;
+  z-index: 2;
+  width: 100%;
+}
+
+.podcast-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  width: 100%;
+  max-width: 1340px;
+  box-sizing: border-box;
+  padding: 0 20px;
+  overflow-x: hidden;
+  overflow-y: visible; /* Añadido para libertad vertical */
+  flex-wrap: nowrap;
+  z-index: 2;
+}
+
+.podcast-section::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.75);
+  z-index: 0;
+}
+
+
+
+.podcast-card:hover {
+  transform: translateY(-10px); /* Ajusta la elevación para evitar que se corte */
+  box-shadow: 0 0 15px rgba(0, 255, 143, 0.8);
+  z-index: 20; /* Asegura que esté por encima de otros elementos durante el hover */
+}
+
+
+.header-container span {
+  width: 10px;
+  height: 10px;
+  background: #00ff8f;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+
+
+.podcast-card {
+  width: 220px;
+  height: 340px;
+  padding: 15px;
+  border-radius: 15px;
+  background: rgba(45, 58, 77, 0.3);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.7);
+  text-align: center;
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  position: relative;
+  z-index: 3; /* Asegura que las tarjetas estén por encima de todo */
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  flex: 0 0 220px; /* Mantiene el ancho fijo */
+  overflow: hidden; /* Evita que el contenido se desborde durante el hover */
+}
+
+
+
+.card-image {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+}
+
+.podcast-card h2 {
+  font-size: 18px;
+  margin-top: 10px;
+}
+
+.podcast-card p {
+  font-size: 14px;
+  margin: 5px 0;
+}
+
+.top-label {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background: #00ff8f;
+  color: #121b2a;
+  padding: 4px 12px 12px 6px;
+  font-size: 14px;
+  font-weight: bold;
+  border-radius: 0 8px 0 8px;
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 0 75%);
+  z-index: 4; /* Asegura que la etiqueta esté por encima de la tarjeta */
+  line-height: 1;
+}
+
+.rating {
+  color: #00ff8f;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.7);
+}
+
+.rating .stars {
+  margin-right: 5px;
+}
+
+.mic-icon {
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  background: #00ff8f;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  box-shadow: 0 0 10px rgba(0, 255, 143, 0.8);
+}
+
+.mic-icon:hover {
+  transform: scale(1.1);
+}
+
+.mic-icon i {
+  font-size: 22px;
+  color: #121b2a;
+}
+
+/**********************************************
+ * Responsividad seccion Podcast Destacados*
+ **********************************************/
+
+@media (max-width: 768px) {
+  .podcast-section {
+    width: 100vw;
+    flex-direction: column;
+  }
+
+  .podcast-content {
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+  }
+
+  .podcast-card {
+    width: 90%;
+    max-width: 300px;
+    flex: auto;
+  }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+  .podcast-content {
+    justify-content: flex-start;
+    padding: 0;
+    flex-wrap: wrap;
+  }
+
+  .podcast-card {
+    flex: 0 0 calc(50% - 20px); /* 2 columnas con gap de 20px */
+    max-width: 220px;
+  }
+}
+
+@media (min-width: 1025px) and (max-width: 1440px) {
+  .podcast-content {
+    justify-content: center;
+    padding: 0;
+    flex-wrap: wrap;
+  }
+
+  .podcast-card {
+    flex: 0 0 calc(33.33% - 20px); /* 3 columnas con gap de 20px para pantallas más grandes */
+    max-width: 220px;
+  }
+}
+
+@media (min-width: 1441px) {
+  .podcast-content {
+    justify-content: center;
+    padding: 0;
+    flex-wrap: nowrap; /* Una sola fila en pantallas grandes */
+  }
+
+  .podcast-card {
+    flex: 0 0 220px; /* Mantiene el ancho fijo en pantallas grandes */
+    max-width: 220px;
+  }
+}
+

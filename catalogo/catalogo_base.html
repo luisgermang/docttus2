@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Catálogo Docttus</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <link rel="stylesheet" href="../css/main.css">
+  <link rel="stylesheet" href="../css/sidebar.css">
+  <link rel="stylesheet" href="../css/topbar.css">
+  <link rel="stylesheet" href="css/catalogo.css">
+</head>
+<body>
+  <!-- SIDEBAR -->
+  <div class="sidebar">
+    <button class="sidebar-close" id="sidebar-close" aria-label="Cerrar menú">×</button>
+    <div class="logo">
+      <img src="img/logo.png" alt="Docttus" />
+    </div>
+    <hr class="logo-divider" />
+    <div class="menu-wrapper">
+      <ul class="menu">
+        <li><a href="../index.html"><i class="fa-solid fa-house"></i> Inicio</a></li>
+        <li><a href="catalogo.html"><i class="fa-solid fa-book"></i> Catálogo</a></li>
+        <li><a href="https://docttus.com/peliculas.html"><i class="fa-solid fa-film"></i> Películas</a></li>
+        <li><a href="#"><i class="fa-solid fa-tv"></i> Series</a></li>
+        <li><a href="#"><i class="fa-solid fa-microphone"></i> Podcast</a></li>
+        <li><a href="#"><i class="fa-solid fa-chalkboard-teacher"></i> Cursos</a></li>
+        <li><a href="https://docttus.com/audiolibros.html"><i class="fa-solid fa-book-open"></i> Audio Libros</a></li>
+        <li class="divider"></li>
+        <li class="new-menu"><a href="#"><i class="fa-solid fa-calendar"></i> Eventos</a></li>
+        <li class="new-menu"><a href="#"><i class="fa-solid fa-newspaper"></i> Blog</a></li>
+        <li class="divider"></li>
+        <li class="pro-card-li">
+          <div class="pro-card">
+            <div class="pro-icon"><i class="fa-solid fa-crown"></i></div>
+            <div class="pro-title">Actualizar a Pro <i class="fa-solid fa-fire"></i></div>
+            <p>Obtén acceso a funciones y contenido premium</p>
+            <button class="pro-button">Actualizar ahora</button>
+          </div>
+        </li>
+        <li><a href="#"><i class="fa-solid fa-gear"></i> Configuración</a></li>
+        <li><a href="https://docttus.com/login.html"><i class="fa-solid fa-right-from-bracket"></i> Log Out</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- TOPBAR -->
+  <div class="topbar">
+    <div class="topbar-left">
+      <button class="hamburger" id="hamburger" aria-label="Abrir menú" aria-expanded="false">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <div class="topbar-center">
+      <div class="search-container">
+        <button class="search-button" id="search-button">
+          <i class="fa-solid fa-magnifying-glass"></i>
+        </button>
+        <input type="text" id="search-input" class="search-input hidden" placeholder="Buscar..." />
+      </div>
+    </div>
+    <div class="topbar-right">
+      <div class="icons">
+        <div class="notification">
+          <div class="icon-circle">
+            <i class="fa-solid fa-bell"></i>
+            <span class="notification-badge">3</span>
+          </div>
+        </div>
+        <div class="profile" id="profile">
+          <img src="../img/perfil.png" alt="Perfil" />
+          <div class="dropdown">
+            <a href="#"><i class="fa-solid fa-gear"></i> Configuración</a>
+            <a href="#"><i class="fa-solid fa-right-from-bracket"></i> Cerrar sesión</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Menú de búsqueda para móviles -->
+  <div class="mobile-search-menu" id="mobile-search-menu">
+    <input type="text" placeholder="Buscar..." />
+  </div>
+
+  <!-- CONTENIDO PRINCIPAL -->
+  <div class="main-content">
+    <h1>Bienvenido a Catálogo Docttus</h1>
+    <p>Aquí va el contenido principal de la página.</p>
+  </div>
+
+  <script src="../js/menu-perfil.js" defer></script>
+  <script src="../js/menu-sidebar.js" defer></script>
+  <script src="../js/menu-busqueda.js" defer></script>
+</body>
+</html>
